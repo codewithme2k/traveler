@@ -129,7 +129,7 @@ export function HeroCousel() {
           </div>
         </div>
 
-        <div className="w-full max-w-4xl mx-auto -mt-8 mb-16">
+        <div className="w-full max-w-4xl mx-auto  mb-16">
           <SearchForm />
         </div>
       </div>
