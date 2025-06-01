@@ -40,7 +40,7 @@ export function HeroSlide({ slide }: HeroSlideProps) {
       </div>
 
       {/* Images Section */}
-      <div className="relative flex justify-center lg:justify-end">
+      <div className="relative flex justify-center lg:justify-end mr-10">
         <div className="relative">
           {/* Main large image */}
           <div className="relative w-80 h-96 lg:w-96 lg:h-[450px]">

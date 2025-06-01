@@ -61,7 +61,7 @@ export function HeroSlider() {
       <BackgroundDecorations />
 
       <div className="relative z-10 container mx-auto px-4 py-8">
-        <div className="min-h-[calc(100vh-200px)] flex flex-col justify-center">
+        <div className=" flex flex-col justify-center">
           <HeroSlide slide={slides[currentSlide]} />
 
           <SliderNavigation

@@ -9,10 +9,11 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from "@/components/ui/carousel";
 import { type CarouselApi } from "@/components/ui/carousel";
 import { Button } from "../ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 const slides = [
   {
     id: 1,
@@ -52,11 +53,10 @@ const slides = [
   },
 ];
 
-export function HeroSlider() {
+export function HeroCousel() {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
-
   useEffect(() => {
     if (!api) return;
 
@@ -74,7 +74,7 @@ export function HeroSlider() {
 
     const interval = setInterval(() => {
       api.scrollNext();
-    }, 2000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [api]);
@@ -85,7 +85,14 @@ export function HeroSlider() {
 
       <div className="relative z-10 container mx-auto px-4 py-8 flex flex-col items-center">
         <div className="min-h-[calc(100vh-300px)] flex flex-col justify-center w-full">
-          <Carousel setApi={setApi} className="w-full">
+          <Carousel
+            setApi={setApi}
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
             <CarouselContent>
               {slides.map((slide) => (
                 <CarouselItem
@@ -98,26 +105,8 @@ export function HeroSlider() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-
-            {/* Custom Navigation Arrows */}
-            <div className="hidden md:flex justify-between absolute top-1/2 left-0 right-0 -translate-y-1/2 z-10 px-4">
-              <Button
-                onClick={() => api?.scrollPrev()}
-                size="icon"
-                variant="ghost"
-                className="h-12 w-12 rounded-full bg-white/80 hover:bg-white text-orange-500 border border-orange-200"
-              >
-                <ChevronLeft className="h-6 w-6" />
-              </Button>
-              <Button
-                onClick={() => api?.scrollNext()}
-                size="icon"
-                variant="ghost"
-                className="h-12 w-12 rounded-full bg-white/80 hover:bg-white text-orange-500 border border-orange-200"
-              >
-                <ChevronRight className="h-6 w-6" />
-              </Button>
-            </div>
+            <CarouselPrevious className="absolute left-0 xl:-left-8 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 border-gray-200" />
+            <CarouselNext className="absolute right-0  xl:-right-8 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 border-gray-200" />
           </Carousel>
 
           {/* Custom Dots Navigation */}
