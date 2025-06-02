@@ -6,6 +6,10 @@ export const mainNavItems: NavigationItem[] = [
     href: "/",
   },
   {
+    title: "About",
+    href: "/about",
+  },
+  {
     title: "Pages",
     href: "#",
     submenu: [
@@ -32,64 +36,7 @@ export const mainNavItems: NavigationItem[] = [
       { title: "Gallery", href: "/gallery" },
     ],
   },
-  {
-    title: "Tour List",
-    href: "/tour-grid-3-columns",
-    submenu: [
-      {
-        title: "Tour Grid",
-        href: "/tour-grid-3-columns",
-        submenu: [
-          { title: "Tour Grid 2 Columns", href: "/tour-grid-2-columns" },
-          { title: "Tour Grid 3 Columns", href: "/tour-grid-3-columns" },
-          { title: "Tour Grid 4 Columns", href: "/tour-grid-4-columns" },
-        ],
-      },
-      {
-        title: "Tour Full",
-        href: "/tour-full-with-frame-right-sidebar",
-        submenu: [
-          { title: "Tour Full Right Sidebar", href: "/tour-full-width" },
-          {
-            title: "Tour Full Left Sidebar",
-            href: "/tour-full-left-sidebar",
-          },
-          {
-            title: "Tour Full With Frame Right Sidebar",
-            href: "/tour-full-with-frame-right-sidebar",
-          },
-          {
-            title: "Tour Full With Frame Left Sidebar",
-            href: "/tour-full-with-frame-left-sidebar",
-          },
-        ],
-      },
-      {
-        title: "Tour Side Thumbnail",
-        href: "/tour-side-thumbnail-with-frame-right-sidebar",
-      },
-      {
-        title: "Tour Thumbnail Style",
-        href: "/tour-thumbnail-style-3-columns",
-      },
-      {
-        title: "Tour Classic",
-        href: "/tour-classic-3-columns",
-      },
-      {
-        title: "Tour Classic With Detail",
-        href: "/tour-classic-with-detail-3-columns",
-      },
-      {
-        title: "Tour Classic With Custom Excerpt",
-        href: "/tour-classic-with-custom-excerpt-3-columns",
-      },
-      {
-        title: "Date & Pricing",
-        href: "#",
-      },
-    ],
-  },
+
   {
     title: "Room List",
     href: "/room",

@@ -1,15 +1,21 @@
-import { Plane } from "lucide-react";
+import Image from "next/image";
 
 export function BackgroundDecorations() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {/* Airplane Icon */}
       <div className="absolute top-20 left-8 lg:left-16">
-        <Plane className="w-16 h-16 text-orange-200 rotate-45" />
+        <Image
+          src={"/Plane.png"}
+          className="  delay-1000 animate-rotateSlow"
+          width={150}
+          height={150}
+          alt="plane"
+        ></Image>
       </div>
 
       {/* Dotted Pattern Left */}
-      <div className="absolute left-4 top-1/2 -translate-y-1/2">
+      <div className="absolute left-4 top-1/2 -translate-y-1/2 animate-rotateSlow ">
         <div className="grid grid-cols-4 gap-2">
           {Array.from({ length: 16 }).map((_, i) => (
             <div

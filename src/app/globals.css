@@ -6,6 +6,9 @@
   .text-balance {
     text-wrap: balance;
   }
+  .animate-float-rotate {
+    animation: float 1s ease-in-out infinite, rotateSlow 5s linear infinite;
+  }
 }
 
 @layer base {
