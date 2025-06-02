@@ -8,6 +8,13 @@ import { Filter, Grid3X3, List } from "lucide-react";
 import { FilterSidebar } from "./FilterSidebar";
 import { MobileFilterBar } from "./MobileFilterBar";
 import { TripCard } from "./TripCard";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 // Sample trip data
 const trips = [
@@ -177,12 +184,23 @@ export default function TripsPage() {
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
                 <span className="text-sm text-gray-600">Sort:</span>
-                <select className="border rounded-md px-2 py-1 text-sm">
-                  <option>Latest</option>
-                  <option>Price: Low to High</option>
-                  <option>Price: High to Low</option>
-                  <option>Duration: Short to Long</option>
-                </select>
+                <Select>
+                  <SelectTrigger className="w-[200px] text-sm">
+                    <SelectValue placeholder="Latest" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="latest">Latest</SelectItem>
+                    <SelectItem value="low-to-high">
+                      Price: Low to High
+                    </SelectItem>
+                    <SelectItem value="high-to-low">
+                      Price: High to Low
+                    </SelectItem>
+                    <SelectItem value="short-to-long">
+                      Duration: Short to Long
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               <div className="flex border rounded-md overflow-hidden">
                 <Button

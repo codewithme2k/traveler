@@ -44,8 +44,9 @@ export default function Header() {
     <header
       className={cn(
         "sticky top-0 z-50 w-full transition-all duration-300",
-        isScrolled ? "bg-white shadow-md" : "bg-transparent"
+        isScrolled ? "bg-background shadow-md" : "bg-transparent"
       )}
+      // đổi màu nền khi cuộn ở trên
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex h-16 items-center justify-between">
