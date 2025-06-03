@@ -7,7 +7,7 @@ import TravelTips from "@/components/travelTips";
 
 export default function Home() {
   return (
-    <div className="">
+    <div className="wapper">
       {/* <HeroSlider /> */}
       <HeroCousel />
       <TravelTips />

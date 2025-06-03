@@ -38,69 +38,132 @@ function FilterSection({
   );
 }
 
-export function FilterSidebar() {
-  const [priceRange, setPriceRange] = useState([250, 900]);
+export interface DestinationState {
+  [key: string]: boolean;
+}
+
+interface FilterSidebarProps {
+  onFilterChange?: (filter: {
+    difficulty?: string;
+    location?: string;
+    priceRange?: [number, number];
+  }) => void;
+  destination: DestinationState;
+  setDestination: React.Dispatch<React.SetStateAction<DestinationState>>;
+  priceRange: [number, number];
+  setPriceRange: React.Dispatch<React.SetStateAction<[number, number]>>;
+}
+
+export function FilterSidebar({
+  onFilterChange,
+  destination,
+  setDestination,
+  priceRange,
+  setPriceRange,
+}: FilterSidebarProps) {
   const [durationRange, setDurationRange] = useState([4, 8]);
+  // State để kiểm soát việc show full destination list
+  const [showAllDestinations, setShowAllDestinations] = useState(false);
+
+  type DestinationKey = keyof typeof destination;
+
+  const handleDestinationChange = (name: DestinationKey) => {
+    setDestination((prev) => {
+      const updated = { ...prev, [name]: !prev[name] };
+      if (onFilterChange) {
+        const selected = (Object.keys(updated) as DestinationKey[]).find(
+          (k) => updated[k]
+        );
+        onFilterChange({
+          location: typeof selected === "string" ? selected : undefined,
+        });
+      }
+      return updated;
+    });
+  };
+
+  // Handler for difficulty filter
+  const handleDifficultyClick = (difficulty: string) => {
+    if (onFilterChange) onFilterChange({ difficulty });
+  };
+
+  // Handler for price filter
+  const handlePriceChange = (range: [number, number]) => {
+    setPriceRange(range);
+    if (onFilterChange) onFilterChange({ priceRange: range });
+  };
+
+  // Danh sách destination mở rộng
+  const allDestinations = [
+    { key: "Annapurna", label: "Annapurna" },
+    { key: "Bhutan", label: "Bhutan" },
+    { key: "Colombo", label: "Colombo" },
+    { key: "England", label: "England" },
+    { key: "France", label: "France" },
+    { key: "Nepal", label: "Nepal" },
+    { key: "Peru", label: "Peru" },
+    { key: "Srilanka", label: "Srilanka" },
+    { key: "India", label: "India" },
+    { key: "Other", label: "Other" },
+  ];
+  const visibleDestinations = showAllDestinations
+    ? allDestinations
+    : allDestinations.slice(0, 4);
 
   return (
     <div className="space-y-1">
-      <h2 className="text-lg font-semibold mb-4">Criteria</h2>
+      <div className="flex justify-between">
+        <h2 className="text-lg font-semibold mb-4">Criteria</h2>
+        <button
+          className="mb-4 ml-2 py-1 bg-background hover:bg-orange-500 hover:text-white text-primary text-xs rounded"
+          onClick={() => {
+            setPriceRange([250, 900]);
+            setDurationRange([4, 8]);
+            setDestination({
+              Annapurna: false,
+              Bhutan: false,
+              Colombo: false,
+              England: false,
+            });
+            if (onFilterChange) onFilterChange({});
+          }}
+        >
+          Clear Filter
+        </button>
+      </div>
 
       <FilterSection title="Destination">
         <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Checkbox id="destination-annapurna" />
-              <label
-                htmlFor="destination-annapurna"
-                className="text-sm text-gray-700"
-              >
-                Annapurna
-              </label>
+          {visibleDestinations.map((dest) => (
+            <div className="flex items-center justify-between" key={dest.key}>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id={`destination-${dest.key.toLowerCase()}`}
+                  checked={!!destination[dest.key]}
+                  onCheckedChange={() =>
+                    handleDestinationChange(dest.key as DestinationKey)
+                  }
+                />
+                <label
+                  htmlFor={`destination-${dest.key.toLowerCase()}`}
+                  className="text-sm text-gray-700"
+                >
+                  {dest.label}
+                </label>
+              </div>
+              <span className="text-xs text-gray-500">2</span>
             </div>
-            <span className="text-xs text-gray-500">2</span>
-          </div>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Checkbox id="destination-bhutan" />
-              <label
-                htmlFor="destination-bhutan"
-                className="text-sm text-gray-700"
-              >
-                Bhutan
-              </label>
-            </div>
-            <span className="text-xs text-gray-500">1</span>
-          </div>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Checkbox id="destination-colombo" />
-              <label
-                htmlFor="destination-colombo"
-                className="text-sm text-gray-700"
-              >
-                Colombo
-              </label>
-            </div>
-            <span className="text-xs text-gray-500">1</span>
-          </div>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Checkbox id="destination-england" />
-              <label
-                htmlFor="destination-england"
-                className="text-sm text-gray-700"
-              >
-                England
-              </label>
-            </div>
-            <span className="text-xs text-gray-500">3</span>
-          </div>
+          ))}
         </div>
-        <button className="text-orange-500 text-sm mt-2 flex items-center">
-          Show all 10
-          <ChevronDown className="h-3 w-3 ml-1" />
-        </button>
+        {!showAllDestinations && (
+          <button
+            className="text-orange-500 text-sm mt-2 flex items-center"
+            onClick={() => setShowAllDestinations(true)}
+          >
+            Show all 10
+            <ChevronDown className="h-3 w-3 ml-1" />
+          </button>
+        )}
       </FilterSection>
 
       <FilterSection title="Price">
@@ -110,15 +173,15 @@ export function FilterSidebar() {
             min={250}
             max={900}
             step={10}
-            onValueChange={setPriceRange}
+            onValueChange={handlePriceChange}
             className="mt-6"
           />
           <div className="flex items-center justify-between">
             <div className="bg-orange-100 text-orange-500 text-xs px-2 py-1 rounded">
-              $250
+              ${priceRange[0]}
             </div>
             <div className="bg-orange-100 text-orange-500 text-xs px-2 py-1 rounded">
-              $900
+              ${priceRange[1]}
             </div>
           </div>
         </div>
@@ -257,7 +320,10 @@ export function FilterSidebar() {
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <Checkbox id="difficulty-easy" />
+              <Checkbox
+                id="difficulty-easy"
+                onClick={() => handleDifficultyClick("Easy")}
+              />
               <label
                 htmlFor="difficulty-easy"
                 className="text-sm text-gray-700"
@@ -269,7 +335,10 @@ export function FilterSidebar() {
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <Checkbox id="difficulty-hard" />
+              <Checkbox
+                id="difficulty-hard"
+                onClick={() => handleDifficultyClick("Hard")}
+              />
               <label
                 htmlFor="difficulty-hard"
                 className="text-sm text-gray-700"
@@ -281,7 +350,10 @@ export function FilterSidebar() {
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <Checkbox id="difficulty-medium" />
+              <Checkbox
+                id="difficulty-medium"
+                onClick={() => handleDifficultyClick("Medium")}
+              />
               <label
                 htmlFor="difficulty-medium"
                 className="text-sm text-gray-700"

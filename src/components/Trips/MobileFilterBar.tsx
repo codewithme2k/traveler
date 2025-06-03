@@ -50,6 +50,15 @@ export function MobileFilterBar({
             </SelectItem>
           </SelectContent>
         </Select>
+        <Button
+          className="text-xs px-3 py-1 bg-background hover:bg-orange-500 hover:text-white text-primary rounded"
+          onClick={() => {
+            setSortValue("latest");
+            if (onSortChange) onSortChange("latest");
+          }}
+        >
+          Clear Sort
+        </Button>
         <div className="flex border rounded-md overflow-hidden">
           <Button
             variant={viewMode === "grid" ? "default" : "ghost"}
