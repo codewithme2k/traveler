@@ -14,15 +14,7 @@ export const mainNavItems: NavigationItem[] = [
     href: "#",
     submenu: [
       { title: "Destinations", href: "/destinations" },
-      {
-        title: "About Us",
-        href: "/about-us",
-        submenu: [
-          { title: "About Us", href: "/about-us" },
-          { title: "About Us 2", href: "/about-us-2" },
-          { title: "About Team", href: "/about-team" },
-        ],
-      },
+
       { title: "Our Service", href: "/our-service" },
       {
         title: "Contact",

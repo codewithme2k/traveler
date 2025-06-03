@@ -211,34 +211,11 @@ export default function Footer() {
           </div>
           <div className="flex items-center space-x-3">
             <Image
-              src="/icons/jcb.svg?height=30&width=50"
+              src="/icons/pay.svg"
               alt="Visa"
-              width={50}
-              height={30}
-            />
-            <Image
-              src="/icons/jcb.svg?height=30&width=50"
-              alt="Mastercard"
-              width={50}
-              height={30}
-            />
-            <Image
-              src="/icons/jcb.svg?height=30&width=50"
-              alt="Discover"
-              width={50}
-              height={30}
-            />
-            <Image
-              src="/icons/jcb.svg?height=30&width=50"
-              alt="PayPal"
-              width={50}
-              height={30}
-            />
-            <Image
-              src="/icons/jcb.svg?height=30&width=50"
-              alt="JCB"
-              width={50}
-              height={30}
+              height={70}
+              width={270}
+              className="object-cover"
             />
           </div>
         </div>

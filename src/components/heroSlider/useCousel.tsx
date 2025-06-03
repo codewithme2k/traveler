@@ -105,8 +105,8 @@ export function HeroCousel() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="absolute left-0 xl:-left-8 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 border-gray-200" />
-            <CarouselNext className="absolute right-0  xl:-right-8 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 border-gray-200" />
+            <CarouselPrevious className="absolute left-0 xl:-left-8 top-1/2 -translate-y-1/2 bg-background hover:bg-gray-50 border-gray-200 text-orange-500 hover:text-orange-500" />
+            <CarouselNext className="absolute right-0  xl:-right-8 top-1/2 -translate-y-1/2 bg-background hover:bg-gray-50 border-gray-200 text-orange-500 hover:text-orange-500" />
           </Carousel>
 
           {/* Custom Dots Navigation */}
